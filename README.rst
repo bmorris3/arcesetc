@@ -12,9 +12,11 @@ Exposure time calculator for APO/ARCES
     :target: http://www.astropy.org
     :alt: Powered by Astropy Badge
 
-Calculate S/N and exposure times for stellar spectroscopy with the ARC Echelle
-Spectrograph (ARCES) on the 3.5 m Telescope at Apache Point Observatory
-
+Calculate S/N and exposure times for
+stellar spectroscopy with the `ARC Echelle Spectrograph (ARCES)
+<https://www.apo.nmsu.edu/arc35m/Instruments/ARCES/>`_ on the
+`ARC 3.5 m Telescope <https://www.apo.nmsu.edu/arc35m/>`_ at
+`Apache Point Observatory <https://www.apo.nmsu.edu>`_.
 
 License
 -------

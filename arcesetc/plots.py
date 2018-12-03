@@ -19,6 +19,9 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     Either ``exp_time`` or ``signal_to_noise`` should be supplied to the
     function (but not both).
 
+    .. warning ::
+        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
+
     Parameters
     ----------
     sptype : str
@@ -37,9 +40,6 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
         exposure time ``exp_time``.
     kwargs : dict
         All extra keyword arguments will be passed to the plot function
-
-    .. warning ::
-        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
 
     Returns
     -------
