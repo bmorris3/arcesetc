@@ -38,6 +38,9 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     kwargs : dict
         All extra keyword arguments will be passed to the plot function
 
+    .. warning ::
+        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
+
     Returns
     -------
     fig : `~matplotlib.pyplot.Figure`
@@ -47,6 +50,34 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
+
+    Examples
+    --------
+
+    Given an exposure time:
+
+    >>> import matplotlib.pyplot as plt
+    >>> import astropy.units as u
+    >>> from arcesetc import plot_order_counts
+    >>> sptype = 'G4V'
+    >>> wavelength = 6562 * u.Angstrom
+    >>> exp_time = 30 * u.min
+    >>> V = 10
+    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, exp_time=exp_time)
+    >>> plt.show()
+
+    ...or given a desired signal-to-noise ratio:
+
+    >>> import matplotlib.pyplot as plt
+    >>> import astropy.units as u
+    >>> from arcesetc import plot_order_counts
+    >>> sptype = 'G4V'
+    >>> wavelength = 6562 * u.Angstrom
+    >>> signal_to_noise = 30
+    >>> V = 10
+    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, signal_to_noise=signal_to_noise)
+    >>> plt.show()
+
     """
     target, closest_spectral_type = closest_target(sptype)
 
@@ -90,6 +121,9 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     Either ``exp_time`` or ``signal_to_noise`` should be supplied to the
     function (but not both).
 
+    .. warning ::
+        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
+
     Parameters
     ----------
     sptype : str
@@ -118,6 +152,33 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
+
+    Examples
+    --------
+
+    Given an exposure time:
+
+    >>> import matplotlib.pyplot as plt
+    >>> import astropy.units as u
+    >>> from arcesetc import plot_order_sn
+    >>> sptype = 'G4V'
+    >>> wavelength = 6562 * u.Angstrom
+    >>> exp_time = 30 * u.min
+    >>> V = 10
+    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, exp_time=exp_time)
+    >>> plt.show()
+
+    ...or given a desired signal-to-noise ratio:
+
+    >>> import matplotlib.pyplot as plt
+    >>> import astropy.units as u
+    >>> from arcesetc import plot_order_sn
+    >>> sptype = 'G4V'
+    >>> wavelength = 6562 * u.Angstrom
+    >>> signal_to_noise = 30
+    >>> V = 10
+    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, signal_to_noise=signal_to_noise)
+    >>> plt.show()
     """
     target, closest_spectral_type = closest_target(sptype)
 

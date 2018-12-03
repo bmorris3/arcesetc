@@ -163,11 +163,15 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
     ``signal_to_noise`` at wavelength ``wavelength`` for a star of spectral type
     ``sptype`` and V magnitude ``V``.
 
+    .. warning ::
+        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
+
     Parameters
     ----------
     sptype : str
         Spectral type of the star. If
     wavelength : `~astropy.units.Quantity`
+        Wavelength of interest.
     V : float
         V magnitude of the target
     signal_to_noise : float
@@ -175,11 +179,26 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
         to generate the S/N curve that has S/N = ``signal_to_noise`` at
         wavelength ``wavelength``. Otherwise, generate S/N curve for
         exposure time ``exp_time``.
+
     Returns
     -------
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
+
+    Examples
+    --------
+
+    How many seconds must one expose ARCES on a V=12 mag M0V star to get a S/N
+    of 30 at the wavelength of H-alpha?
+
+    >>> from arcesetc import signal_to_noise_to_exp_time
+    >>> sptype = 'M0V'
+    >>> wavelength = 6562 * u.Angstrom
+    >>> signal_to_noise = 30
+    >>> V = 12
+    >>> signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise)
+    642.11444 s
     """
     target, closest_spectral_type = closest_target(sptype)
 
