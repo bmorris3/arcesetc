@@ -62,8 +62,8 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     >>> wavelength = 6562 * u.Angstrom
     >>> exp_time = 30 * u.min
     >>> V = 10
-    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, exp_time=exp_time)
-    >>> plt.show()
+    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, exp_time=exp_time) #doctest: +SKIP
+    >>> plt.show() #doctest: +SKIP
 
     ...or given a desired signal-to-noise ratio:
 
@@ -74,8 +74,8 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     >>> wavelength = 6562 * u.Angstrom
     >>> signal_to_noise = 30
     >>> V = 10
-    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, signal_to_noise=signal_to_noise)
-    >>> plt.show()
+    >>> fig, ax, exp_time = plot_order_counts(sptype, wavelength, V, signal_to_noise=signal_to_noise) #doctest: +SKIP
+    >>> plt.show() #doctest: +SKIP
 
     """
     target, closest_spectral_type = closest_target(sptype)
@@ -166,8 +166,8 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     >>> wavelength = 6562 * u.Angstrom
     >>> exp_time = 30 * u.min
     >>> V = 10
-    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, exp_time=exp_time)
-    >>> plt.show()
+    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, exp_time=exp_time) #doctest: +SKIP
+    >>> plt.show() #doctest: +SKIP
 
     ...or given a desired signal-to-noise ratio:
 
@@ -178,8 +178,8 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     >>> wavelength = 6562 * u.Angstrom
     >>> signal_to_noise = 30
     >>> V = 10
-    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, signal_to_noise=signal_to_noise)
-    >>> plt.show()
+    >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, signal_to_noise=signal_to_noise) #doctest: +SKIP
+    >>> plt.show() #doctest: +SKIP
     """
     target, closest_spectral_type = closest_target(sptype)
 

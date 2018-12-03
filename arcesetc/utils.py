@@ -197,7 +197,7 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
     >>> wavelength = 6562 * u.Angstrom
     >>> signal_to_noise = 30
     >>> V = 12
-    >>> signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise)
+    >>> print(signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise)) # doctest: +FLOAT_CMP
     642.11444 s
     """
     target, closest_spectral_type = closest_target(sptype)
