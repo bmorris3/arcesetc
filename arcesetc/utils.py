@@ -1,0 +1,194 @@
+
+import numpy as np
+from json import load
+import os
+import h5py
+import astropy.units as u
+
+__all__ = ['available_sptypes', 'signal_to_noise_to_exp_time']
+
+directory = os.path.dirname(__file__)
+
+sptypes = load(open(os.path.join(directory, 'data', 'sptype_dict.json'), 'r'))
+archive = h5py.File(os.path.join(directory, 'data', 'archive.hdf5'), 'r')
+
+sptype_to_temp = load(open(os.path.join(directory, 'data',
+                                        'sptype_to_temp.json'), 'r'))
+spectral_types = [key for key in sptype_to_temp.keys() if key in sptypes]
+temps = np.array([sptype_to_temp[key] for key in spectral_types])
+
+
+def _closest_sptype(sptype):
+    """
+    Return closest spectral type in the archive.
+
+    Parameters
+    ----------
+    sptype : str
+        Spectral type in the format: ``G2V``
+
+    Returns
+    -------
+    closest_spectral_type : str
+        Closest spectral type available in the archive
+    """
+    return spectral_types[np.argmin(np.abs(sptype_to_temp[sptype] - temps))]
+
+
+def _closest_target(sptype):
+    """
+    Return target with the closest spectral type in the archive.
+
+    Parameters
+    ----------
+    sptype : str
+        Spectral type in the format: ``G2V``
+
+    Returns
+    -------
+    target_name : str
+        Name of the target closest to spectral type ``sptype``
+    closest_spectral_type : str
+        Closest spectral type available in the archive
+    """
+    closest_spectral_type = _closest_sptype(sptype)
+    return sptypes[closest_spectral_type], closest_spectral_type
+
+
+def available_sptypes():
+    """
+    Return a list of available spectral types in the archive.
+
+    Returns
+    -------
+    sptypes : list
+        List of available spectral types
+    """
+    return sorted(spectral_types)
+
+
+def _get_closest_order(matrix, wavelength):
+    """
+    Return the spectral order index closest to wavelength ``wavelength``.
+
+    Parameters
+    ----------
+    matrix : `~np.ndarray`
+        Matrix of blaze function curves from the archive
+    wavelength : `~astropy.units.Quantity`
+        Wavelength of interest.
+
+    Returns
+    -------
+    closest_order : int
+        Closest spectral order to wavelength ``wavelength``
+    """
+    return np.argmin(np.abs(matrix[:, 0] - wavelength.to(u.Angstrom).value))
+
+
+def _matrix_row_to_spectrum(matrix, closest_order):
+    """
+    Given a ``matrix`` from the archive and a spectral order index
+    ``closest_order``, return the spectrum (wavelength and flux).
+
+    Parameters
+    ----------
+    matrix : `~np.ndarray`
+        Matrix of blaze function curves from the archive
+    closest_order : int
+        Closest spectral order to wavelength ``wavelength``
+
+    Returns
+    -------
+    wave : `~astropy.units.Quantity`
+        Wavelengths
+    flux : `~np.ndarray`
+        Fluxes in counts per second at each wavelength
+    """
+    lam_0, delta_lam, n_lam = matrix[closest_order][:3]
+    polynomial_coeffs = matrix[closest_order][3:]
+    wave = np.arange(lam_0 - n_lam*delta_lam/2, lam_0 + n_lam*delta_lam/2,
+                     delta_lam) * u.Angstrom
+    flux = np.polyval(polynomial_coeffs, wave-lam_0 * u.Angstrom)
+    return wave, flux
+
+
+def _scale_flux(dataset, V):
+    """
+    Parameters
+    ----------
+    dataset : `~h5py.File.dataset`
+        h5py dataset of the form ``archive[target]``.
+    V : float
+        V magnitude of the target of interest.
+    """
+    template_vmag = dataset.attrs['V'][0]
+    magnitude_scaling = 10**(0.4 * (template_vmag - V))
+    return magnitude_scaling
+
+
+def _sn_to_exp_time(wave, flux, wavelength, signal_to_noise):
+    """
+    Calculate the required exposure time to achieve signal-to-noise ratio
+    ``signal_to_noise`` given the count rates ``flux`` as a function of
+    wavelength ``wave``.
+
+    Parameters
+    ----------
+    wave : `~astropy.units.Quantity`
+        Wavelengths
+    flux : `~np.ndarray`
+        Flux in counts per second
+    wavelength : `~astropy.units.Quantity`
+        Wavelength of interest at which the S/N is ``signal_to_noise``
+    signal_to_noise : float
+        Desired signal-to-noise
+
+    Returns
+    -------
+    exp_time : `~astropy.units.Quantity`
+        Exposure time that will yield signal-to-noise ``signal_to_noise`` at
+        wavelength ``wavelength``.
+    """
+
+    # `flux` at the test wavelength
+    flux_0 = flux[np.argmin(np.abs(wave - wavelength))]
+    exp_time = signal_to_noise**2 / flux_0
+    return exp_time * u.s
+
+
+@u.quantity_input(exp_time=u.s, wavelength=u.Angstrom)
+def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
+    """
+    Compute the exposure time required to collect signal-to-noise ratio
+    ``signal_to_noise`` at wavelength ``wavelength`` for a star of spectral type
+    ``sptype`` and V magnitude ``V``.
+
+    Parameters
+    ----------
+    sptype : str
+        Spectral type of the star. If
+    wavelength : `~astropy.units.Quantity`
+    V : float
+        V magnitude of the target
+    signal_to_noise : float
+        If ``signal_to_noise`` is a float, compute the appropriate exposure time
+        to generate the S/N curve that has S/N = ``signal_to_noise`` at
+        wavelength ``wavelength``. Otherwise, generate S/N curve for
+        exposure time ``exp_time``.
+    Returns
+    -------
+    exp_time : `~astropy.units.Quantity`
+        Exposure time input, or computed to achieve S/N ratio
+        ``signal_to_noise`` at wavelength ``wavelength``
+    """
+    target, closest_spectral_type = _closest_target(sptype)
+
+    matrix = archive[target][:]
+
+    closest_order = _get_closest_order(matrix, wavelength)
+    wave, flux = _matrix_row_to_spectrum(matrix, closest_order)
+    flux *= _scale_flux(archive[target], V)
+
+    exp_time = _sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
+    return exp_time
