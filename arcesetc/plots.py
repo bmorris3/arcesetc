@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import astropy.units as u
 from .utils import (closest_target, archive, scale_flux,
@@ -86,6 +85,8 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     closest_order = get_closest_order(matrix, wavelength)
     wave, flux = matrix_row_to_spectrum(matrix, closest_order)
     flux *= scale_flux(archive[target], V)
+
+    import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots()
 
@@ -187,6 +188,8 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     closest_order = get_closest_order(matrix, wavelength)
     wave, flux = matrix_row_to_spectrum(matrix, closest_order)
     flux *= scale_flux(archive[target], V)
+
+    import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots()
 
