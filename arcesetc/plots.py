@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import astropy.units as u
+from .utils import (closest_target, archive, scale_flux,
+                    get_closest_order, matrix_row_to_spectrum,
+                    sn_to_exp_time)
 
-from .utils import (_closest_target, available_sptypes, archive,
-                    _get_closest_order, _matrix_row_to_spectrum, _scale_flux,
-                    _sn_to_exp_time)
-
-__all__ = ['plot_order_counts', 'plot_order_sn', 'available_sptypes']
+__all__ = ['plot_order_counts', 'plot_order_sn']
 
 
 @u.quantity_input(exp_time=u.s, wavelength=u.Angstrom)
@@ -49,13 +48,13 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
     """
-    target, closest_spectral_type = _closest_target(sptype)
+    target, closest_spectral_type = closest_target(sptype)
 
     matrix = archive[target][:]
 
-    closest_order = _get_closest_order(matrix, wavelength)
-    wave, flux = _matrix_row_to_spectrum(matrix, closest_order)
-    flux *= _scale_flux(archive[target], V)
+    closest_order = get_closest_order(matrix, wavelength)
+    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
+    flux *= scale_flux(archive[target], V)
 
     fig, ax = plt.subplots()
 
@@ -63,7 +62,7 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
         flux *= exp_time.to(u.s).value
 
     elif exp_time is None and signal_to_noise is not None:
-        exp_time = _sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
+        exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
         flux *= exp_time.value
     else:
         raise ValueError("Supply either the `exp_time` or the "
@@ -120,20 +119,20 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
     """
-    target, closest_spectral_type = _closest_target(sptype)
+    target, closest_spectral_type = closest_target(sptype)
 
     matrix = archive[target][:]
 
-    closest_order = _get_closest_order(matrix, wavelength)
-    wave, flux = _matrix_row_to_spectrum(matrix, closest_order)
-    flux *= _scale_flux(archive[target], V)
+    closest_order = get_closest_order(matrix, wavelength)
+    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
+    flux *= scale_flux(archive[target], V)
 
     fig, ax = plt.subplots()
 
     if exp_time is not None:
         flux *= exp_time.to(u.s).value
     elif exp_time is None and signal_to_noise is not None:
-        exp_time = _sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
+        exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
         flux *= exp_time.value
     else:
         raise ValueError("Supply either the `exp_time` or the "

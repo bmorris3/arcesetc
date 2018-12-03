@@ -10,5 +10,6 @@ dependencies:
     - matplotlib
     - numpy
     - sphinx-astropy
+    - h5py
 #   - pip:
 #       - dependency_from_pip

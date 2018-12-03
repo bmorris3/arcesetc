@@ -1,4 +1,3 @@
-
 import numpy as np
 from json import load
 import os
@@ -18,7 +17,7 @@ spectral_types = [key for key in sptype_to_temp.keys() if key in sptypes]
 temps = np.array([sptype_to_temp[key] for key in spectral_types])
 
 
-def _closest_sptype(sptype):
+def closest_sptype(sptype):
     """
     Return closest spectral type in the archive.
 
@@ -35,7 +34,7 @@ def _closest_sptype(sptype):
     return spectral_types[np.argmin(np.abs(sptype_to_temp[sptype] - temps))]
 
 
-def _closest_target(sptype):
+def closest_target(sptype):
     """
     Return target with the closest spectral type in the archive.
 
@@ -51,7 +50,7 @@ def _closest_target(sptype):
     closest_spectral_type : str
         Closest spectral type available in the archive
     """
-    closest_spectral_type = _closest_sptype(sptype)
+    closest_spectral_type = closest_sptype(sptype)
     return sptypes[closest_spectral_type], closest_spectral_type
 
 
@@ -67,7 +66,7 @@ def available_sptypes():
     return sorted(spectral_types)
 
 
-def _get_closest_order(matrix, wavelength):
+def get_closest_order(matrix, wavelength):
     """
     Return the spectral order index closest to wavelength ``wavelength``.
 
@@ -86,7 +85,7 @@ def _get_closest_order(matrix, wavelength):
     return np.argmin(np.abs(matrix[:, 0] - wavelength.to(u.Angstrom).value))
 
 
-def _matrix_row_to_spectrum(matrix, closest_order):
+def matrix_row_to_spectrum(matrix, closest_order):
     """
     Given a ``matrix`` from the archive and a spectral order index
     ``closest_order``, return the spectrum (wavelength and flux).
@@ -113,7 +112,7 @@ def _matrix_row_to_spectrum(matrix, closest_order):
     return wave, flux
 
 
-def _scale_flux(dataset, V):
+def scale_flux(dataset, V):
     """
     Parameters
     ----------
@@ -127,7 +126,7 @@ def _scale_flux(dataset, V):
     return magnitude_scaling
 
 
-def _sn_to_exp_time(wave, flux, wavelength, signal_to_noise):
+def sn_to_exp_time(wave, flux, wavelength, signal_to_noise):
     """
     Calculate the required exposure time to achieve signal-to-noise ratio
     ``signal_to_noise`` given the count rates ``flux`` as a function of
@@ -182,13 +181,13 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
         Exposure time input, or computed to achieve S/N ratio
         ``signal_to_noise`` at wavelength ``wavelength``
     """
-    target, closest_spectral_type = _closest_target(sptype)
+    target, closest_spectral_type = closest_target(sptype)
 
     matrix = archive[target][:]
 
-    closest_order = _get_closest_order(matrix, wavelength)
-    wave, flux = _matrix_row_to_spectrum(matrix, closest_order)
-    flux *= _scale_flux(archive[target], V)
+    closest_order = get_closest_order(matrix, wavelength)
+    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
+    flux *= scale_flux(archive[target], V)
 
-    exp_time = _sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
+    exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
     return exp_time
