@@ -1,10 +1,11 @@
-import numpy as np
 from json import load
 import os
+import numpy as np
 import h5py
 import astropy.units as u
 
-__all__ = ['available_sptypes', 'signal_to_noise_to_exp_time']
+__all__ = ['available_sptypes', 'signal_to_noise_to_exp_time',
+           'reconstruct_order']
 
 directory = os.path.dirname(__file__)
 
@@ -154,6 +155,67 @@ def sn_to_exp_time(wave, flux, wavelength, signal_to_noise):
     flux_0 = flux[np.argmin(np.abs(wave - wavelength))]
     exp_time = signal_to_noise**2 / flux_0
     return exp_time * u.s
+
+
+@u.quantity_input(exp_time=u.s, wavelength=u.Angstrom)
+def reconstruct_order(sptype, wavelength, V, exp_time=None,
+                      signal_to_noise=None):
+    """
+    Return the counts as a function of wavelength for the spectral
+    order nearest to ``wavelength`` for a star of spectral type ``sptype`` and
+    V magnitude ``V``.
+
+    Either ``exp_time`` or ``signal_to_noise`` should be supplied to the
+    function (but not both).
+
+    .. warning ::
+        ``arcesetc`` doesn't know anything about saturation. Ye be warned!
+
+    Parameters
+    ----------
+    sptype : str
+        Spectral type of the star. If
+    wavelength : `~astropy.units.Quantity`
+    V : float
+        V magnitude of the target
+    exp_time : None or float
+        If ``exp_time`` is a float, show the counts curve for that exposure
+        time. Otherwise, use ``signal_to_noise`` to compute the appropriate
+        exposure time.
+    signal_to_noise : None or float
+        If ``signal_to_noise`` is a float, compute the appropriate exposure time
+        to generate the counts curve that has S/N = ``signal_to_noise`` at
+        wavelength ``wavelength``. Otherwise, generate counts curve for
+        exposure time ``exp_time``.
+
+    Returns
+    -------
+    wave : `~astropy.units.Quantity`
+        Wavelengths
+    flux : `~np.ndarray`
+        Flux at each wavelength
+    exp_time : `~astropy.units.Quantity`
+        Exposure time input; or required to reach S/N of ``signal_to_noise``
+    """
+
+    target, closest_spectral_type = closest_target(sptype)
+
+    matrix = archive[target][:]
+
+    closest_order = get_closest_order(matrix, wavelength)
+    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
+    flux *= scale_flux(archive[target], V)
+
+    if exp_time is not None and signal_to_noise is None:
+        flux *= exp_time.to(u.s).value
+
+    elif exp_time is None and signal_to_noise is not None:
+        exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
+        flux *= exp_time.value
+    else:
+        raise ValueError("Supply either the `exp_time` or the "
+                         "`signal_to_noise` keyword argument.")
+    return wave, flux, closest_spectral_type, exp_time
 
 
 @u.quantity_input(exp_time=u.s, wavelength=u.Angstrom)

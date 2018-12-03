@@ -1,9 +1,7 @@
 import numpy as np
 import astropy.units as u
 import matplotlib.pyplot as plt
-from .util import (closest_target, archive, scale_flux,
-                   get_closest_order, matrix_row_to_spectrum,
-                   sn_to_exp_time)
+from .util import reconstruct_order
 
 __all__ = ['plot_order_counts', 'plot_order_sn']
 
@@ -79,28 +77,17 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     >>> plt.show() #doctest: +SKIP
 
     """
-    target, closest_spectral_type = closest_target(sptype)
 
-    matrix = archive[target][:]
-
-    closest_order = get_closest_order(matrix, wavelength)
-    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
-    flux *= scale_flux(archive[target], V)
+    wave, flux, closest_sptype, exp_time = reconstruct_order(sptype,
+                                                             wavelength,
+                                                             V,
+                                                             exp_time=exp_time,
+                                                             signal_to_noise=signal_to_noise)
 
     fig, ax = plt.subplots()
 
-    if exp_time is not None and signal_to_noise is None:
-        flux *= exp_time.to(u.s).value
-
-    elif exp_time is None and signal_to_noise is not None:
-        exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
-        flux *= exp_time.value
-    else:
-        raise ValueError("Supply either the `exp_time` or the "
-                         "`signal_to_noise` keyword argument.")
-
     ax.set_title('Sp. Type: {0}, Exposure time: {1:.1f}'
-                 .format(closest_spectral_type, exp_time.to(u.min)))
+                 .format(closest_sptype, exp_time.to(u.min)))
     ax.plot(wave, flux, **kwargs)
     ax.set_xlabel('Wavelength [Angstrom]')
     ax.set_ylabel('Flux [DN]')
@@ -180,27 +167,17 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     >>> fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, signal_to_noise=signal_to_noise) #doctest: +SKIP
     >>> plt.show() #doctest: +SKIP
     """
-    target, closest_spectral_type = closest_target(sptype)
-
-    matrix = archive[target][:]
-
-    closest_order = get_closest_order(matrix, wavelength)
-    wave, flux = matrix_row_to_spectrum(matrix, closest_order)
-    flux *= scale_flux(archive[target], V)
 
     fig, ax = plt.subplots()
 
-    if exp_time is not None:
-        flux *= exp_time.to(u.s).value
-    elif exp_time is None and signal_to_noise is not None:
-        exp_time = sn_to_exp_time(wave, flux, wavelength, signal_to_noise)
-        flux *= exp_time.value
-    else:
-        raise ValueError("Supply either the `exp_time` or the "
-                         "`signal_to_noise` keyword argument.")
+    wave, flux, closest_sptype, exp_time = reconstruct_order(sptype,
+                                                             wavelength,
+                                                             V,
+                                                             exp_time=exp_time,
+                                                             signal_to_noise=signal_to_noise)
     sn = flux / np.sqrt(flux)
     ax.set_title('Sp. Type: {0}, Exposure time: {1:.1f}'
-                 .format(closest_spectral_type, exp_time.to(u.min)))
+                 .format(closest_sptype, exp_time.to(u.min)))
     ax.plot(wave, sn, **kwargs)
     ax.set_xlabel('Wavelength [Angstrom]')
     ax.set_ylabel('Signal/Noise')

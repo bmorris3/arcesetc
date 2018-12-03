@@ -18,6 +18,8 @@ stellar spectroscopy with the `ARC Echelle Spectrograph (ARCES)
 `ARC 3.5 m Telescope <https://www.apo.nmsu.edu/arc35m/>`_ at
 `Apache Point Observatory <https://www.apo.nmsu.edu>`_.
 
+For more information, `read the docs <https://arcesetc.readthedocs.io/>`_.
+
 License
 -------
 

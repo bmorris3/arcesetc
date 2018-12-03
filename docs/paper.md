@@ -29,13 +29,14 @@ the desired exposure time in order to determine the counts and signal-to-noise
 ratio as a function of wavelength; or the desired signal-to-noise ratio at a 
 given wavelength to determine the required exposure time. 
 
-We estimates the count rates for stars as a function of wavelength by fitting 
+We estimate the count rates for stars as a function of wavelength by fitting 
 15th-order polynomials to each spectral order of real observations of a star of 
 each spectral type. These polynomial coefficients and some wavelength metadata
 are stored in an HDF5 archive for compactness and easy of reconstruction. Then
 upon calling ``arcesetc``, the archive is opened and the spectral order closest
 to the wavelength of interest is reconstructed from the polynomial 
-coeffiecients.
+coefficients, for a star of the closest available spectral type to the one 
+requested. 
 
 At present, the stellar spectral types included in the ``arcesetc`` library
 span from late F to early M stars on the main sequence, and one each of an 
