@@ -37,7 +37,7 @@ env:
         
         # List runtime dependencies for the package that are available as conda
         # packages here.
-        - CONDA_DEPENDENCIES='h5py matplotlib'
+        - CONDA_DEPENDENCIES='h5py matplotlib specutils'
         - CONDA_DEPENDENCIES_DOC='sphinx-astropy h5py matplotlib'
 
         # List other runtime dependencies for the package that are available as
