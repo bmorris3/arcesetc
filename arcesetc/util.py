@@ -15,7 +15,7 @@ archive = h5py.File(os.path.join(directory, 'data', 'archive.hdf5'), 'r')
 sptype_to_temp = load(open(os.path.join(directory, 'data',
                                         'sptype_to_temp.json'), 'r'))
 spectral_types = [key for key in sptype_to_temp.keys() if key in sptypes]
-temps = np.array([sptype_to_temp[key] for key in spectral_types])
+temps = np.array([sptype_to_temp[key] for key in spectral_types if key in sptype_to_temp])
 
 
 def closest_sptype(sptype):
@@ -32,6 +32,8 @@ def closest_sptype(sptype):
     closest_spectral_type : str
         Closest spectral type available in the archive
     """
+    if sptype in sptypes:
+        return sptype
     return spectral_types[np.argmin(np.abs(sptype_to_temp[sptype] - temps))]
 
 
@@ -64,7 +66,7 @@ def available_sptypes():
     sptypes : list
         List of available spectral types
     """
-    return sorted(spectral_types)
+    return sorted(sptypes.keys())
 
 
 def get_closest_order(matrix, wavelength):
