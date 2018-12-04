@@ -1,84 +1,15 @@
 import os
-import pytest
-import numpy as np
-import astropy.units as u
-from astropy.io import fits
-from specutils.io import read_fits
 
+import astropy.units as u
+import numpy as np
+import pytest
+from astropy.io import fits
+
+from .legacy_specutils import readspec
 from ..util import (reconstruct_order, closest_sptype, archive, scale_flux,
                     signal_to_noise_to_exp_time)
 
 path = os.path.dirname(__file__)
-
-
-class Spectrum1D(object):
-    """
-    Simple 1D spectrum object; taken from `aesop`.
-
-    A ``Spectrum1D`` object can be used to describe one order of an echelle
-    spectrum, for example.
-
-    If the spectrum is initialized with ``wavelength``s that are not strictly
-    increasing, ``Spectrum1D`` will sort the ``wavelength``, ``flux`` and
-    ``mask`` arrays so that ``wavelength`` is monotonically increasing.
-    """
-    @u.quantity_input(wavelength=u.Angstrom)
-    def __init__(self, wavelength=None, flux=None, name=None, mask=None,
-                 wcs=None, meta=dict(), time=None, continuum_normalized=None):
-        """
-        Parameters
-        ----------
-        wavelength : `~numpy.ndarray`
-            Wavelengths
-        flux : `~numpy.ndarray`
-            Fluxes
-        name : str (optional)
-            Name for the spectrum
-        mask : `~numpy.ndarray` (optional)
-            Boolean mask of the same shape as ``flux``
-        wcs : `~specutils.Spectrum1DLookupWCS` (optional)
-            Store the WCS parameters
-        meta : dict (optional)
-            Metadata dictionary.
-        continuum_normalized : bool (optional)
-            Is this spectrum continuum normalized?
-        """
-
-        # Are wavelengths stored in increasing order?
-        wl_inc = np.all(np.diff(wavelength) > 0)
-
-        # If not, force them to be, to simplify linear interpolation later.
-        if not wl_inc:
-            wl_sort = np.argsort(wavelength)
-            wavelength = wavelength[wl_sort]
-            flux = flux[wl_sort]
-            if mask is not None:
-                mask = mask[wl_sort]
-
-        self.wavelength = wavelength
-        self.wavelength_unit = wavelength.unit
-        self.flux = flux if hasattr(flux, 'unit') else u.Quantity(flux)
-        self.name = name
-        self.mask = mask
-        self.wcs = wcs
-        self.meta = meta
-        self.time = time
-        self.continuum_normalized = continuum_normalized
-
-    @classmethod
-    def from_specutils(cls, spectrum1d, name=None, **kwargs):
-        """
-        Convert a `~specutils.Spectrum1D` object into our Spectrum1D object.
-
-        Parameters
-        ----------
-        spectrum1d : `~specutils.Spectrum1D`
-            Input spectrum
-        name : str
-            Target/spectrum name
-        """
-        return cls(wavelength=spectrum1d.wavelength, flux=spectrum1d.flux,
-                   mask=spectrum1d._mask, name=name, **kwargs)
 
 
 @pytest.mark.parametrize("order", [35, 41, 60])
@@ -90,8 +21,9 @@ def test_reconstruct_order(order):
 
     fits_path = os.path.join(path, os.pardir, 'data', 'HR3454.0016.wfrmcpc.fits')
 
-    b3v = [Spectrum1D.from_specutils(s)
-           for s in read_fits.read_fits_spectrum1d(fits_path)]
+    b3v = readspec.read_fits_spectrum1d(fits_path)
+    #[Spectrum1D(s)
+           #for s in readspec.read_fits_spectrum1d(fits_path)]
     header = fits.getheader(fits_path)
 
     wave, flux, sp_type, exp_time = reconstruct_order('B3V',
