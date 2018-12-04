@@ -22,8 +22,6 @@ def test_reconstruct_order(order):
     fits_path = os.path.join(path, os.pardir, 'data', 'HR3454.0016.wfrmcpc.fits')
 
     b3v = readspec.read_fits_spectrum1d(fits_path)
-    #[Spectrum1D(s)
-           #for s in readspec.read_fits_spectrum1d(fits_path)]
     header = fits.getheader(fits_path)
 
     wave, flux, sp_type, exp_time = reconstruct_order('B3V',
