@@ -12,6 +12,10 @@ Exposure time calculator for APO/ARCES
     :target: http://www.astropy.org
     :alt: Powered by Astropy Badge
 
+.. image:: https://img.shields.io/badge/powered%20by-aesop-orange.svg?style=flat
+    :target: https://github.com/bmorris3/aesop
+    :alt: Powered by aesop badge
+
 Calculate S/N and exposure times for
 stellar spectroscopy with the `ARC Echelle Spectrograph (ARCES)
 <https://www.apo.nmsu.edu/arc35m/Instruments/ARCES/>`_ on the
