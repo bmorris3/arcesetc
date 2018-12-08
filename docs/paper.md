@@ -11,6 +11,9 @@ authors:
   - name: Trevor Dorn-Wallenstein
     orcid: 0000-0003-3601-3180
     affiliation: 1
+  - name: Charli Sakari
+    orcid: 0000-0002-5095-4000
+    affiliation: 1
 affiliations:
  - name: Astronomy Department, University of Washington, Seattle, WA, USA
    index: 1

@@ -7,6 +7,9 @@ stellar spectroscopy with the `ARC Echelle Spectrograph (ARCES)
 `ARC 3.5 m Telescope <https://www.apo.nmsu.edu/arc35m/>`_ at
 `Apache Point Observatory <https://www.apo.nmsu.edu>`_.
 
+You can view the source code and/or contribute to ``arcesetc`` via
+`GitHub <https://github.com/bmorris3/arcesetc>`_.
+
 .. toctree::
   :maxdepth: 2
 
