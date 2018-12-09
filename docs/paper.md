@@ -11,6 +11,9 @@ authors:
   - name: Trevor Dorn-Wallenstein
     orcid: 0000-0003-3601-3180
     affiliation: 1
+  - name: Emily M. Levesque
+    orcid: 0000-0003-2184-1581
+    affiliation: 1
   - name: Charli Sakari
     orcid: 0000-0002-5095-4000
     affiliation: 1
@@ -42,16 +45,16 @@ coefficients, for a star of the closest available spectral type to the one
 requested. 
 
 At present, the stellar spectral types included in the ``arcesetc`` library
-span from late F to early M stars on the main sequence, and one each of an 
-O, B, and Wolf-Rayet star. Contributions from the community are welcome to 
-expand the library to include other spectral types.
+span from late F to early M stars on the main sequence, a variety of M giants, 
+and one each of an O, B, and Wolf-Rayet star. Contributions from the community 
+are welcome to expand the library to include other spectral types.
 
 ``arcesetc`` was built from the Astropy package-template, and thus includes 
 self-building documentation and continuous integration [@astropy:2018].
 
 # Acknowledgements
 
-We acknowledge guidance from Suzanne L. Hawley and Emily Levesque, and the invaluable 
+We acknowledge guidance from Suzanne L. Hawley, and the invaluable 
 framework and dev team behind the astropy package-template.
 
 # References
