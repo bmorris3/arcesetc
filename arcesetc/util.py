@@ -1,4 +1,5 @@
 from json import load
+from difflib import get_close_matches
 import os
 import numpy as np
 import h5py
@@ -34,7 +35,12 @@ def closest_sptype(sptype):
     """
     if sptype in sptypes:
         return sptype
-    return spectral_types[np.argmin(np.abs(sptype_to_temp[sptype] - temps))]
+    elif len(sptype) == 3 and sptype.endswith("V"):
+        return spectral_types[np.argmin(np.abs(sptype_to_temp[sptype] - temps))]
+    else:
+        raise ValueError("We don't have a match to this spectral type. The "
+                         "nearest ones we have on hand are: {0}"
+                         .format(get_close_matches(sptype, available_sptypes())))
 
 
 def closest_target(sptype):

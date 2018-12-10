@@ -1,3 +1,15 @@
+/Users/bmmorris/data/arcesetc/gsu/HD108945.180404.fits
+/Users/bmmorris/data/arcesetc/gsu/HD12869.170106.fits
+/Users/bmmorris/data/arcesetc/gsu/HD15558.151201.fits
+/Users/bmmorris/data/arcesetc/gsu/HD191692.180625.fits
+/Users/bmmorris/data/arcesetc/gsu/HD193322.160914.fits
+/Users/bmmorris/data/arcesetc/gsu/HD199579.180927.fits
+/Users/bmmorris/data/arcesetc/gsu/HD205637.151201.fits
+/Users/bmmorris/data/arcesetc/gsu/HD37043.151201.fits
+/Users/bmmorris/data/arcesetc/gsu/HD54662.151201.fits
+/Users/bmmorris/data/arcesetc/gsu/HD79763.161101.fits
+/Users/bmmorris/data/arcesetc/gsu/HD8374.160126.fits
+/Users/bmmorris/data/arcesetc/gsu/HD89822.180128.fits
 /Users/bmmorris/data/arcesetc/emily/vdfemcBD56595.comb.new.fits
 /Users/bmmorris/data/arcesetc/emily/vdfemcBD57647.comb.new.fits
 /Users/bmmorris/data/arcesetc/emily/vdfemcBD59372.comb.new.fits
