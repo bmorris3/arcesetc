@@ -11,5 +11,7 @@ You can install ``arcesetc`` from the source code by doing the following::
     cd arcesetc
     python setup.py install
 
+``arcesetc`` requires python >=3.5, numpy, astropy, h5py, and matplotlib.
+
 If you have any trouble installing ``arcesetc``, feel free to post an issue
 on `GitHub <https://github.com/bmorris3/arcesetc/issues>`_.

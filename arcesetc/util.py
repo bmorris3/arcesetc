@@ -257,6 +257,7 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
     of 30 at the wavelength of H-alpha?
 
     >>> from arcesetc import signal_to_noise_to_exp_time
+    >>> import astropy.units as u
     >>> sptype = 'M0V'
     >>> wavelength = 6562 * u.Angstrom
     >>> signal_to_noise = 30

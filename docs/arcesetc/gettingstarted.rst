@@ -66,7 +66,7 @@ like so::
     fig, ax, exp_time = plot_order_sn(sptype, wavelength, V, exp_time=exp_time)
     plt.show()
 
-.. warning::
+.. note::
 
     The spectral type output by the ``arcesetc`` package (``G5V``) isn't
     exactly the same as the one we requested (``G4V``). That's because the
@@ -80,6 +80,9 @@ Signal-to-noise to exposure time
 Given a S/N at a particular wavelength, what's the appropriate exposure time? We
 can find out by supplying the desired ``signal_to_noise``, and ``arcesetc`` will
 compute the exposure time for you::
+
+    import matplotlib.pyplot as plt
+    import astropy.units as u
 
     sptype = 'B3V'
     wavelength = 3990 * u.Angstrom
