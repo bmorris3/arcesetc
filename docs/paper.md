@@ -17,9 +17,17 @@ authors:
   - name: Charli Sakari
     orcid: 0000-0002-5095-4000
     affiliation: 1
+  - name: Doug Gies
+    orcid: 0000-0001-8537-3583
+    affiliation: 2
+  - name: Katherine Lester
+    orcid: 0000-0002-9903-9911
+    affiliation: 2
 affiliations:
  - name: Astronomy Department, University of Washington, Seattle, WA, USA
    index: 1
+ - name: Physics-Astronomy Department, Georgia State University, Atlanta, GA, USA
+   index: 2
 date: 1 Jan 2019
 bibliography: paper.bib
 --- 

@@ -16,7 +16,8 @@ archive = h5py.File(os.path.join(directory, 'data', 'archive.hdf5'), 'r')
 sptype_to_temp = load(open(os.path.join(directory, 'data',
                                         'sptype_to_temp.json'), 'r'))
 spectral_types = [key for key in sptype_to_temp.keys() if key in sptypes]
-temps = np.array([sptype_to_temp[key] for key in spectral_types if key in sptype_to_temp])
+temps = np.array([sptype_to_temp[key] for key in spectral_types
+                  if key in sptype_to_temp])
 
 
 def closest_sptype(sptype):
