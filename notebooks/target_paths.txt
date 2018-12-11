@@ -1,3 +1,11 @@
+/Users/bmmorris/data/arcesetc/yuta/HR3454.0025.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR4963.0030.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR5191.0002.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR5501.0033.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR718.0025.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR7596.0017.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR7950.0010.wfrmcpc.fits
+/Users/bmmorris/data/arcesetc/yuta/HR8634.0017.wfrmcpc.fits
 /Users/bmmorris/data/arcesetc/gsu/HD108945.180404.fits
 /Users/bmmorris/data/arcesetc/gsu/HD12869.170106.fits
 /Users/bmmorris/data/arcesetc/gsu/HD15558.151201.fits

@@ -23,11 +23,16 @@ authors:
   - name: Katherine Lester
     orcid: 0000-0002-9903-9911
     affiliation: 2
+  - name: Yuta Notsu
+    orcid: 0000-0002-0412-0849
+    affiliation: 3
 affiliations:
  - name: Astronomy Department, University of Washington, Seattle, WA, USA
    index: 1
  - name: Physics-Astronomy Department, Georgia State University, Atlanta, GA, USA
    index: 2
+ - name: Department of Astronomy, Kyoto University, Sakyo Ward, Kyoto, Kyoto Prefecture 606-8501, Japan
+   index: 3
 date: 1 Jan 2019
 bibliography: paper.bib
 --- 
