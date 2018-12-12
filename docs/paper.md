@@ -57,10 +57,11 @@ to the wavelength of interest is reconstructed from the polynomial
 coefficients, for a star of the closest available spectral type to the one 
 requested. 
 
-At present, the stellar spectral types included in the ``arcesetc`` library
-span from late F to early M stars on the main sequence, a variety of M giants, 
-and one each of an O, B, and Wolf-Rayet star. Contributions from the community 
-are welcome to expand the library to include other spectral types.
+At present, the 79 stellar spectral types included in the ``arcesetc`` library
+span from mid F to mid M stars on the main sequence, a variety of M giants, 
+a handful of O and B, and and a white dwarf and a Wolf-Rayet star. Contributions
+from the community are welcome to expand the library to include other spectral 
+types.
 
 ``arcesetc`` was built from the Astropy package-template, and thus includes 
 self-building documentation and continuous integration [@astropy:2018].

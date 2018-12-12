@@ -40,25 +40,48 @@ def test_reconstruct_order_B3V(order):
 @pytest.mark.parametrize("order", [30, 35, 41, 60, 65, 70, 75, 80, 90])
 def test_reconstruct_order_white_dwarf(order):
     """
-    End-to-end functional test on several well-behaved orders of an early-type
-    star.
+    End-to-end functional test on several well-behaved orders of a white dwarf
     """
 
     fits_path = os.path.join(path, os.pardir, 'data',
                              'BD28_4211.0026.wfrmcpc.fits')
 
-    b3v = readspec.read_fits_spectrum1d(fits_path)
+    wd = readspec.read_fits_spectrum1d(fits_path)
     header = fits.getheader(fits_path)
 
     # Reconstruct the order for a star with the same V mag as the template
 
     wave, flux, sp_type, exp_time = reconstruct_order('sdO2VIIIHe5',
-                                                      b3v[order].wavelength.mean(),
+                                                      wd[order].wavelength.mean(),
                                                       10.58,
                                                       exp_time=header['EXPTIME']*u.s)
 
-    interp_flux = np.interp(b3v[order].wavelength, wave, flux)
-    np.testing.assert_allclose(b3v[order].flux, interp_flux, atol=500, rtol=1e-1)
+    interp_flux = np.interp(wd[order].wavelength, wave, flux)
+    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=1e-1)
+    assert sp_type == 'sdO2VIIIHe5'
+
+
+@pytest.mark.parametrize("order", [30, 35, 41, 60, 65, 75, 80])
+def test_reconstruct_order_white_dwarf_2(order):
+    """
+    End-to-end functional test on several well-behaved orders of a white dwarf
+    """
+
+    fits_path = os.path.join(path, os.pardir, 'data',
+                             'HIP107864.0003.wfrmcpc.fits')
+
+    wd = readspec.read_fits_spectrum1d(fits_path)
+    header = fits.getheader(fits_path)
+
+    # Reconstruct the order for a star with the same V mag as the template
+
+    wave, flux, sp_type, exp_time = reconstruct_order('sdO2VIIIHe5',
+                                                      wd[order].wavelength.mean(),
+                                                      10.58,
+                                                      exp_time=header['EXPTIME']*u.s)
+
+    interp_flux = np.interp(wd[order].wavelength, wave, flux)
+    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=0.2)
     assert sp_type == 'sdO2VIIIHe5'
 
 
