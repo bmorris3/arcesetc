@@ -57,7 +57,7 @@ def test_reconstruct_order_white_dwarf(order):
                                                       exp_time=header['EXPTIME']*u.s)
 
     interp_flux = np.interp(wd[order].wavelength, wave, flux)
-    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=1e-1)
+    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=0.05)
     assert sp_type == 'sdO2VIIIHe5'
 
 
@@ -86,7 +86,7 @@ def test_reconstruct_order_white_dwarf_2(order):
 
 
 def test_closest_sptype():
-    """Test that package finds closest available sptype"""
+    """Test the function that finds closest available sptype"""
     assert closest_sptype('G4V') == 'G5V'
     assert closest_sptype('B4V') == 'B3V'
 

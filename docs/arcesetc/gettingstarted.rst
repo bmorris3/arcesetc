@@ -83,6 +83,7 @@ compute the exposure time for you::
 
     import matplotlib.pyplot as plt
     import astropy.units as u
+    from arcesetc import plot_order_sn
 
     sptype = 'B3V'
     wavelength = 3990 * u.Angstrom
@@ -97,7 +98,7 @@ compute the exposure time for you::
     import matplotlib.pyplot as plt
     import astropy.units as u
 
-    from arcesetc import plot_order_counts, plot_order_sn
+    from arcesetc import plot_order_sn
 
     sptype = 'B3V'
     wavelength = 3990 * u.Angstrom
@@ -111,9 +112,12 @@ compute the exposure time for you::
 Wolf-Rayet Star
 ---------------
 
-We presently have one non-main sequence star in the library, and it's a
-Wolf-Rayet star of spectral type ``WN8h``. You can see the funky effects of the
-strong emission lines on the S/N near H-alpha, for example::
+We presently have one Wolf-Rayet star of spectral type ``WN8h``.
+You can see the funky effects of the strong emission lines on the S/N near
+H-alpha, for example::
+
+    import astropy.units as u
+    from arcesetc import plot_order_sn
 
     sptype = 'WN8h'
     wavelength = 6562 * u.Angstrom
@@ -128,7 +132,7 @@ strong emission lines on the S/N near H-alpha, for example::
     import matplotlib.pyplot as plt
     import astropy.units as u
 
-    from arcesetc import plot_order_counts, plot_order_sn
+    from arcesetc import plot_order_sn
 
     sptype = 'WN8h'
     wavelength = 6562 * u.Angstrom

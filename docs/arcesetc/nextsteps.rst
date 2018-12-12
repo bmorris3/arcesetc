@@ -27,10 +27,13 @@ Available spectral types
 You can see which spectral types are available with the
 `~arcesetc.available_sptypes` function.
 
-.. warning::
-    At present, the best coverage is for late-F through early-M type main
-    sequence stars.
+.. note::
+    At present, the best coverage is for mid-F through mid-M type main
+    sequence stars, with some M giants.
 
+Here's a color-magnitude diagram of the stars presently available in ``arcesetc``:
+
+.. image:: cmd.png
 
 How it works
 ------------
