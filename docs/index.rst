@@ -17,3 +17,15 @@ You can view the source code and/or contribute to ``arcesetc`` via
   arcesetc/gettingstarted.rst
   arcesetc/nextsteps.rst
   arcesetc/index.rst
+
+Contributors
+++++++++++++
+
+- Brett M. Morris
+- Trevor Dorn-Wallenstein
+- Emily M. Levesque
+- Charli Sakari
+- Doug Gies
+- Katherine Lester
+- Yuta Notsu
+- Allison Youngblood

@@ -26,6 +26,10 @@ authors:
   - name: Yuta Notsu
     orcid: 0000-0002-0412-0849
     affiliation: 3
+  - name: Allison Youngblood
+    orcid: 0000-0002-1176-3391
+    affiliation: 4
+
 affiliations:
  - name: Astronomy Department, University of Washington, Seattle, WA, USA
    index: 1
@@ -33,6 +37,8 @@ affiliations:
    index: 2
  - name: Department of Astronomy, Kyoto University, Sakyo Ward, Kyoto, Kyoto Prefecture 606-8501, Japan
    index: 3
+ - name: NASA Goddard Space Flight Center, Greenbelt, MD, USA
+   index: 4
 date: 1 Jan 2019
 bibliography: paper.bib
 --- 
