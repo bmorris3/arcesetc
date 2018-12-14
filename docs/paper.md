@@ -1,5 +1,5 @@
 ---
-title: 'arcesetc: ARC Echelle Spectroscopic Exposure Time Calculator'
+title: 'arcesetc: ARC Echelle Spectrograph Exposure Time Calculator'
 tags:
   - Python
   - astronomy
