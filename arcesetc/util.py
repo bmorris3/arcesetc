@@ -27,12 +27,12 @@ def closest_sptype(sptype):
     Parameters
     ----------
     sptype : str
-        Spectral type in the format: ``G2V``
+        Spectral type in the format: ``G2V``.
 
     Returns
     -------
     closest_spectral_type : str
-        Closest spectral type available in the archive
+        Closest spectral type available in the archive.
     """
     if sptype in sptypes:
         return sptype
@@ -51,14 +51,14 @@ def closest_target(sptype):
     Parameters
     ----------
     sptype : str
-        Spectral type in the format: ``G2V``
+        Spectral type in the format: ``G2V``.
 
     Returns
     -------
     target_name : str
-        Name of the target closest to spectral type ``sptype``
+        Name of the target closest to spectral type ``sptype``.
     closest_spectral_type : str
-        Closest spectral type available in the archive
+        Closest spectral type available in the archive.
     """
     closest_spectral_type = closest_sptype(sptype)
     return sptypes[closest_spectral_type], closest_spectral_type
@@ -71,7 +71,7 @@ def available_sptypes():
     Returns
     -------
     sptypes : list
-        List of available spectral types
+        List of available spectral types.
     """
     return sorted(sptypes.keys())
 
@@ -83,14 +83,14 @@ def get_closest_order(matrix, wavelength):
     Parameters
     ----------
     matrix : `~np.ndarray`
-        Matrix of blaze function curves from the archive
+        Matrix of blaze function curves from the archive.
     wavelength : `~astropy.units.Quantity`
         Wavelength of interest.
 
     Returns
     -------
     closest_order : int
-        Closest spectral order to wavelength ``wavelength``
+        Closest spectral order to wavelength ``wavelength``.
     """
     return np.argmin(np.abs(matrix[:, 0] - wavelength.to(u.Angstrom).value))
 
@@ -103,16 +103,16 @@ def matrix_row_to_spectrum(matrix, closest_order):
     Parameters
     ----------
     matrix : `~np.ndarray`
-        Matrix of blaze function curves from the archive
+        Matrix of blaze function curves from the archive.
     closest_order : int
-        Closest spectral order to wavelength ``wavelength``
+        Closest spectral order to wavelength ``wavelength``.
 
     Returns
     -------
     wave : `~astropy.units.Quantity`
-        Wavelengths
+        Wavelengths.
     flux : `~np.ndarray`
-        Fluxes in counts per second at each wavelength
+        Fluxes in counts per second at each wavelength.
     """
     lam_0, delta_lam, n_lam = matrix[closest_order][:3]
     polynomial_coeffs = matrix[closest_order][3:]
@@ -145,13 +145,13 @@ def sn_to_exp_time(wave, flux, wavelength, signal_to_noise):
     Parameters
     ----------
     wave : `~astropy.units.Quantity`
-        Wavelengths
+        Wavelengths.
     flux : `~np.ndarray`
-        Flux in counts per second
+        Flux in counts per second.
     wavelength : `~astropy.units.Quantity`
-        Wavelength of interest at which the S/N is ``signal_to_noise``
+        Wavelength of interest at which the S/N is ``signal_to_noise``.
     signal_to_noise : float
-        Desired signal-to-noise
+        Desired signal-to-noise.
 
     Returns
     -------
@@ -183,10 +183,10 @@ def reconstruct_order(sptype, wavelength, V, exp_time=None,
     Parameters
     ----------
     sptype : str
-        Spectral type of the star. If
+        Spectral type of the star.
     wavelength : `~astropy.units.Quantity`
     V : float
-        V magnitude of the target
+        V magnitude of the target.
     exp_time : None or float
         If ``exp_time`` is a float, show the counts curve for that exposure
         time. Otherwise, use ``signal_to_noise`` to compute the appropriate
@@ -200,11 +200,11 @@ def reconstruct_order(sptype, wavelength, V, exp_time=None,
     Returns
     -------
     wave : `~astropy.units.Quantity`
-        Wavelengths
+        Wavelengths.
     flux : `~np.ndarray`
-        Flux at each wavelength
+        Flux at each wavelength.
     exp_time : `~astropy.units.Quantity`
-        Exposure time input; or required to reach S/N of ``signal_to_noise``
+        Exposure time input; or required to reach S/N of ``signal_to_noise``.
     """
 
     target, closest_spectral_type = closest_target(sptype)
@@ -240,11 +240,11 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
     Parameters
     ----------
     sptype : str
-        Spectral type of the star. If
+        Spectral type of the star.
     wavelength : `~astropy.units.Quantity`
         Wavelength of interest.
     V : float
-        V magnitude of the target
+        V magnitude of the target.
     signal_to_noise : float
         If ``signal_to_noise`` is a float, compute the appropriate exposure time
         to generate the S/N curve that has S/N = ``signal_to_noise`` at
@@ -255,7 +255,7 @@ def signal_to_noise_to_exp_time(sptype, wavelength, V, signal_to_noise):
     -------
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
-        ``signal_to_noise`` at wavelength ``wavelength``
+        ``signal_to_noise`` at wavelength ``wavelength``.
 
     Examples
     --------
