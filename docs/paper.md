@@ -57,7 +57,7 @@ given wavelength to determine the required exposure time.
 We estimate the count rates for stars as a function of wavelength by fitting 
 15th-order polynomials to each spectral order of real observations of a star of 
 each spectral type. These polynomial coefficients and some wavelength metadata
-are stored in an HDF5 archive for compactness and easy of reconstruction. Then
+are stored in an HDF5 archive for compactness and ease of reconstruction. Then
 upon calling ``arcesetc``, the archive is opened and the spectral order closest
 to the wavelength of interest is reconstructed from the polynomial 
 coefficients, for a star of the closest available spectral type to the one 
@@ -65,7 +65,7 @@ requested.
 
 At present, the 79 stellar spectral types included in the ``arcesetc`` library
 span from mid F to mid M stars on the main sequence, a variety of M giants, 
-a handful of O and B, and and a white dwarf and a Wolf-Rayet star. Contributions
+a handful of O and B, and a white dwarf and a Wolf-Rayet star. Contributions
 from the community are welcome to expand the library to include other spectral 
 types.
 

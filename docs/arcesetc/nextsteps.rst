@@ -41,7 +41,7 @@ How it works
 We estimate the count rates for stars as a function of wavelength by fitting
 15th-order polynomials to each spectral order of real observations of a star of
 each spectral type. These polynomial coefficients and some wavelength metadata
-are stored in an HDF5 archive for compactness and easy of reconstruction. Then
+are stored in an HDF5 archive for compactness and ease of reconstruction. Then
 upon calling ``arcesetc``, the archive is opened and the spectral order closest
 to the wavelength of interest is reconstructed from the polynomial
 coefficients, for a star of the closest available spectral type to the one
