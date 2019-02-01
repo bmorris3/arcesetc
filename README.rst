@@ -44,6 +44,10 @@ to the wavelength of interest is reconstructed from the polynomial
 coefficients, for a star of the closest available spectral type to the one
 requested. 
 
+
+Installation
+------------
+
 You can install ``arcesetc`` with pip::
 
     pip install arcesetc
