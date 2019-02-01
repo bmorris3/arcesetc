@@ -29,6 +29,8 @@ authors:
   - name: Allison Youngblood
     orcid: 0000-0002-1176-3391
     affiliation: 4
+  - name: Russet McMillan
+    affiliation: 5
 
 affiliations:
  - name: Astronomy Department, University of Washington, Seattle, WA, USA
@@ -39,7 +41,9 @@ affiliations:
    index: 3
  - name: NASA Goddard Space Flight Center, Greenbelt, MD, USA
    index: 4
-date: 1 Jan 2019
+ - name: Apache Point Observatory
+   index: 5
+date: 1 Feb 2019
 bibliography: paper.bib
 --- 
 
@@ -48,7 +52,8 @@ bibliography: paper.bib
 The ARC Echelle Spectroscopic (ARCES) Exposure Time Calculator, or ``arcesetc``,
 is a simple exposure time calculator for the ARCES instrument on the 
 Astrophysical Research Consortium (ARC) 3.5 m Telescope at Apache Point 
-Observatory for stellar spectroscopy. Users can supply ``arcesetc`` functions 
+Observatory for stellar spectroscopy. Astronomers can use it to plan observations
+with the ARCES instrument. Users can supply ``arcesetc`` functions 
 with the spectral type of their target star, the V band magnitude, and either: 
 the desired exposure time in order to determine the counts and signal-to-noise
 ratio as a function of wavelength; or the desired signal-to-noise ratio at a 
