@@ -23,6 +23,11 @@ temps = np.array([sptype_to_temp[key] for key in spectral_types
 def closest_sptype(sptype):
     """
     Return closest spectral type in the archive.
+    
+    If ``sptype`` is a dwarf star of spectral class V and
+    the exact spectral type is not present in the archive,
+    return the star with the closest spectral type to the 
+    input spectral type. 
 
     Parameters
     ----------
