@@ -23,10 +23,10 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
     Parameters
     ----------
     sptype : str
-        Spectral type of the star. If
+        Spectral type of the star.
     wavelength : `~astropy.units.Quantity`
     V : float
-        V magnitude of the target
+        V magnitude of the target.
     exp_time : None or float
         If ``exp_time`` is a float, show the counts curve for that exposure
         time. Otherwise, use ``signal_to_noise`` to compute the appropriate
@@ -37,17 +37,17 @@ def plot_order_counts(sptype, wavelength, V, exp_time=None,
         wavelength ``wavelength``. Otherwise, generate counts curve for
         exposure time ``exp_time``.
     kwargs : dict
-        All extra keyword arguments will be passed to the plot function
+        All extra keyword arguments will be passed to the plot function.
 
     Returns
     -------
     fig : `~matplotlib.pyplot.Figure`
         Matplotlib figure object.
     ax : `~matplotlib.pyplot.Axes`
-        Matplotlib axes object
+        Matplotlib axes object.
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
-        ``signal_to_noise`` at wavelength ``wavelength``
+        ``signal_to_noise`` at wavelength ``wavelength``.
 
     Examples
     --------
@@ -114,10 +114,10 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
     Parameters
     ----------
     sptype : str
-        Spectral type of the star. If
+        Spectral type of the star. 
     wavelength : `~astropy.units.Quantity`
     V : float
-        V magnitude of the target
+        V magnitude of the target.
     exp_time : None or float
         If ``exp_time`` is a float, show the S/N curve for that exposure time.
         Otherwise, use ``signal_to_noise`` to compute the appropriate exposure
@@ -128,17 +128,17 @@ def plot_order_sn(sptype, wavelength, V, exp_time=None, signal_to_noise=None,
         wavelength ``wavelength``. Otherwise, generate S/N curve for
         exposure time ``exp_time``.
     kwargs : dict
-        All extra keyword arguments will be passed to the plot function
+        All extra keyword arguments will be passed to the plot function.
 
     Returns
     -------
     fig : `~matplotlib.pyplot.Figure`
         Matplotlib figure object.
     ax : `~matplotlib.pyplot.Axes`
-        Matplotlib axes object
+        Matplotlib axes object.
     exp_time : `~astropy.units.Quantity`
         Exposure time input, or computed to achieve S/N ratio
-        ``signal_to_noise`` at wavelength ``wavelength``
+        ``signal_to_noise`` at wavelength ``wavelength``.
 
     Examples
     --------
