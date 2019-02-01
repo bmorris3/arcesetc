@@ -3,7 +3,7 @@ Contributing
 ------------
 
 We love contributions! arcesetc is open source,
-built on open source, and we'd love to have you hang out in our community.
+built on open source, and we'd love to have you hang out in our community. 
 
 **Imposter syndrome disclaimer**: We want your help. No, really.
 
@@ -30,3 +30,9 @@ the errors and assumptions that seasoned contributors have glossed over.
 `PyCon talk <https://www.youtube.com/watch?v=6Uj746j9Heo>`_, and was adapted by
 arcesetc based on its use in the README file for the
 `MetPy project <https://github.com/Unidata/MetPy>`_.*
+
+Contributing new spectra
+------------------------
+
+If you have additional spectra that you'd like to add to the `arcsetc` package, 
+please email morrisbrettm@gmail.com with your spectra!
