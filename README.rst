@@ -19,6 +19,9 @@ Exposure time calculator for APO/ARCES
 .. image:: https://img.shields.io/badge/powered%20by-aesop-orange.svg?style=flat
     :target: https://github.com/bmorris3/aesop
     :alt: Powered by aesop badge
+    
+.. image:: http://joss.theoj.org/papers/10.21105/joss.01130/status.svg
+   :target: https://doi.org/10.21105/joss.01130
 
 .. image:: https://zenodo.org/badge/160124540.svg
    :target: https://zenodo.org/badge/latestdoi/160124540
