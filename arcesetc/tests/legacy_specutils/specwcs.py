@@ -491,7 +491,7 @@ class CompositeWCS(Model):
         """
         self.wcs_list.append(wcs)
 
-    def __call__(self, input):
+    def __call__(self, input, **kwargs):
         """
         Applies the chain of WCS'es and functions to the input and returns the
         result
@@ -640,7 +640,7 @@ class MultispecIRAFCompositeWCS(BaseSpectrum1DWCS, CompositeWCS):
         if log:
             self.add_WCS(lambda x: 10 ** x)
 
-    def __call__(self, pixel_indices):
+    def __call__(self, pixel_indices, **kwargs):
         """
         Applies the model to the pixel coordinates, to produce the dispersion
         at those pixels
@@ -651,7 +651,7 @@ class MultispecIRAFCompositeWCS(BaseSpectrum1DWCS, CompositeWCS):
             the pixel coordinates on which dispersion needs to be computed
         """
         dispersion = super(MultispecIRAFCompositeWCS,
-                           self).__call__(pixel_indices)
+                           self).__call__(pixel_indices, **kwargs)
         return dispersion * self.unit
 
     def get_fits_spec(self):

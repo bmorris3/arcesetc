@@ -12,7 +12,7 @@ from ..util import (reconstruct_order, closest_sptype, archive, scale_flux,
 path = os.path.dirname(__file__)
 
 
-@pytest.mark.parametrize("order", [30, 35, 41, 60, 65, 70, 75, 80, 90])
+@pytest.mark.parametrize("order,", [30, 35, 41, 60, 65, 70, 75, 80, 90])
 def test_reconstruct_order_B3V(order):
     """
     End-to-end functional test on several well-behaved orders of an early-type
@@ -26,14 +26,13 @@ def test_reconstruct_order_B3V(order):
     header = fits.getheader(fits_path)
 
     # Reconstruct the order for a star with the same V mag as the template
-
     wave, flux, sp_type, exp_time = reconstruct_order('B3V',
                                                       b3v[order].wavelength.mean(),
                                                       1.86,
                                                       exp_time=header['EXPTIME']*u.s)
 
     interp_flux = np.interp(b3v[order].wavelength, wave, flux)
-    np.testing.assert_allclose(b3v[order].flux, interp_flux, atol=500, rtol=1e-1)
+    np.testing.assert_allclose(b3v[order].flux.value, interp_flux, atol=500, rtol=1e-1)
     assert sp_type == 'B3V'
 
 
@@ -57,7 +56,7 @@ def test_reconstruct_order_white_dwarf(order):
                                                       exp_time=header['EXPTIME']*u.s)
 
     interp_flux = np.interp(wd[order].wavelength, wave, flux)
-    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=0.05)
+    np.testing.assert_allclose(wd[order].flux.value, interp_flux, atol=500, rtol=0.05)
     assert sp_type == 'sdO2VIIIHe5'
 
 
@@ -81,7 +80,7 @@ def test_reconstruct_order_white_dwarf_2(order):
                                                       exp_time=header['EXPTIME']*u.s)
 
     interp_flux = np.interp(wd[order].wavelength, wave, flux)
-    np.testing.assert_allclose(wd[order].flux, interp_flux, atol=500, rtol=0.2)
+    np.testing.assert_allclose(wd[order].flux.value, interp_flux, atol=500, rtol=0.2)
     assert sp_type == 'sdO2VIIIHe5'
 
 

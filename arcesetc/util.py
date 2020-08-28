@@ -122,9 +122,9 @@ def matrix_row_to_spectrum(matrix, closest_order):
     lam_0, delta_lam, n_lam = matrix[closest_order][:3]
     polynomial_coeffs = matrix[closest_order][3:]
     wave = np.arange(lam_0 - n_lam*delta_lam/2, lam_0 + n_lam*delta_lam/2,
-                     delta_lam) * u.Angstrom
-    flux = np.polyval(polynomial_coeffs, wave-lam_0 * u.Angstrom)
-    return wave, flux
+                     delta_lam)
+    flux = np.polyval(polynomial_coeffs, wave-lam_0)
+    return wave * u.Angstrom, flux
 
 
 def scale_flux(dataset, V):
