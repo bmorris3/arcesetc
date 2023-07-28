@@ -4,8 +4,8 @@ import astropy.units as u
 import numpy as np
 import pytest
 from astropy.io import fits
+from specutils import SpectrumCollection
 
-from .legacy_specutils import readspec
 from ..util import (reconstruct_order, closest_sptype, archive, scale_flux,
                     signal_to_noise_to_exp_time)
 
@@ -22,7 +22,7 @@ def test_reconstruct_order_B3V(order):
     fits_path = os.path.join(path, os.pardir, 'data',
                              'HR5191.0002.wfrmcpc.fits')
 
-    b3v = readspec.read_fits_spectrum1d(fits_path)
+    b3v = SpectrumCollection.read(fits_path)
     header = fits.getheader(fits_path)
 
     # Reconstruct the order for a star with the same V mag as the template
@@ -45,7 +45,7 @@ def test_reconstruct_order_white_dwarf(order):
     fits_path = os.path.join(path, os.pardir, 'data',
                              'BD28_4211.0026.wfrmcpc.fits')
 
-    wd = readspec.read_fits_spectrum1d(fits_path)
+    wd = SpectrumCollection.read(fits_path)
     header = fits.getheader(fits_path)
 
     # Reconstruct the order for a star with the same V mag as the template
@@ -69,7 +69,7 @@ def test_reconstruct_order_white_dwarf_2(order):
     fits_path = os.path.join(path, os.pardir, 'data',
                              'HIP107864.0003.wfrmcpc.fits')
 
-    wd = readspec.read_fits_spectrum1d(fits_path)
+    wd = SpectrumCollection.read(fits_path)
     header = fits.getheader(fits_path)
 
     # Reconstruct the order for a star with the same V mag as the template
