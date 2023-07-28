@@ -1,6 +1,10 @@
 Exposure time calculator for APO/ARCES
 --------------------------------------
 
+.. image:: https://github.com/bmorris3/arcesetc/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/bmorris3/arcesetc/actions/workflows/ci.yml
+   :alt: Testing status
+
 .. image:: https://readthedocs.org/projects/arcesetc/badge/?version=latest
     :target: https://arcesetc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
