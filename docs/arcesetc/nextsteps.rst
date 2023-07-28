@@ -7,7 +7,9 @@ No plots, just exposure times
 You can also calculate the exposure time required to obtain a given S/N using
 the `~arcesetc.signal_to_noise_to_exp_time` function. For example - how many
 seconds must one expose ARCES on a V=12 mag M0V star to get a S/N of 30 at the
-wavelength of H-alpha::
+wavelength of H-alpha:
+
+.. code-block:: python
 
     from arcesetc import signal_to_noise_to_exp_time
     import astropy.units as u
@@ -28,6 +30,7 @@ You can see which spectral types are available with the
 `~arcesetc.available_sptypes` function.
 
 .. note::
+
     At present, the best coverage is for mid-F through mid-M type main
     sequence stars, with some M giants.
 
@@ -58,6 +61,6 @@ Run the tests
 If you're contributing to ``arcesetc``, you can check that your updates don't
 break the API by running the tests like this in the source directory::
 
-    python setup.py test
+    tox -e test
 
 If the tests pass, you're ready to submit a pull request!
