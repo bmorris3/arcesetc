@@ -1,9 +1,6 @@
 Exposure time calculator for APO/ARCES
 --------------------------------------
 
-.. image:: https://travis-ci.org/bmorris3/arcesetc.svg?branch=master
-    :target: https://travis-ci.org/bmorris3/arcesetc
-
 .. image:: https://readthedocs.org/projects/arcesetc/badge/?version=latest
     :target: https://arcesetc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
@@ -15,10 +12,6 @@ Exposure time calculator for APO/ARCES
 .. image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
     :target: http://www.astropy.org
     :alt: Powered by Astropy Badge
-
-.. image:: https://img.shields.io/badge/powered%20by-aesop-orange.svg?style=flat
-    :target: https://github.com/bmorris3/aesop
-    :alt: Powered by aesop badge
     
 .. image:: http://joss.theoj.org/papers/10.21105/joss.01130/status.svg
    :target: https://doi.org/10.21105/joss.01130
